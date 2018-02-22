@@ -20,3 +20,4 @@ nvm
 
 2. Install express.js
 expressjs.com
+# npm install express --save
