@@ -1,7 +1,10 @@
+//1.1 include expressjs
 var express = require('express');
 
+//1.2 instance of express
 var app = express();
 
+//2.2 add json-struct
 var questions = [
   {
     id: 1,
@@ -15,14 +18,23 @@ var questions = [
   }
 ];
 
+//1.3 first root route 
 app.get('/', function (req, res) {
   res.send('Hello API');
 })
 
-app.get('/questions', function (req, res) {
+//2.2 add base route for questions
+app.get('/questions', (req, res)=> {
   res.send(questions);
 })
 
+//2.3 add base route for questions
+app.get('/question/:id', (req, res) => {
+  console.log(req.params);
+  res.send(questions.find((question)=>{return question.id === Number(req.params.id)}));
+})
+
+//1.4 add listen
 app.listen(3012, function() {
   console.log('API app started');
 })
