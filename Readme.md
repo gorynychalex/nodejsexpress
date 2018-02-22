@@ -21,3 +21,7 @@ nvm
 2. Install express.js
 expressjs.com
 # npm install express --save
+
+3. Create and run 'server.js'
+# vi server.js
+# node server.js
