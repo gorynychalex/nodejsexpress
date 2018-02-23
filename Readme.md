@@ -30,4 +30,5 @@ expressjs.com
 3. Insert add json-structure and routers 'server.js'
 
 4. Install mongodb
-
+4.1. npm install
+4.2. include mongodb

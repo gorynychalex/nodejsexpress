@@ -4,8 +4,14 @@ var express = require('express');
 //3.1 body-parser include
 var bodyParser = require('body-parser');
 
+//4.1 mongodb include and MongoClient initialize
+var MongoClient = require('mongodb').MongoClient;
+
 //1.2 instance of express
 var app = express();
+
+//4.2 db define
+var db;
 
 //3.2 body-parser insert into app
 app.use(bodyParser.json());
@@ -61,7 +67,15 @@ app.delete('/question/:id', (req, res) => {
   res.sendStatus(200);
 })
 
-//1.4 add listen
-app.listen(3012, function() {
-  console.log('API app started');
-})
+
+//4.4 db initialize and include app.listen()
+MongoClient.connect('mongodb://localhost:27017/myapi', (err, database) => {
+  if(err) { return console.log(err); }
+  db = database; 
+
+  //1.4 add listen
+  app.listen(3012, function() {
+    console.log('API app started');
+  })
+
+});
