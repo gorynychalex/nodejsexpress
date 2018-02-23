@@ -1,8 +1,15 @@
 //1.1 include expressjs
 var express = require('express');
 
+//3.1 body-parser include
+var bodyParser = require('body-parser');
+
 //1.2 instance of express
 var app = express();
+
+//3.2 body-parser insert into app
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true}));
 
 //2.2 add json-struct
 var questions = [
@@ -32,6 +39,13 @@ app.get('/questions', (req, res)=> {
 app.get('/question/:id', (req, res) => {
   console.log(req.params);
   res.send(questions.find((question)=>{return question.id === Number(req.params.id)}));
+})
+
+//3.3 add post route
+app.post('/questions', (req, res) => {
+  console.log(req.body);
+  questions.push(req.body);
+  res.send(questions);
 })
 
 //1.4 add listen
