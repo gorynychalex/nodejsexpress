@@ -1,6 +1,7 @@
 Youtube
 Loft Blog
 Кочергин
+https://youtu.be/fHoKs66Z2qQ
 
 API NodeJS
 
@@ -25,3 +26,5 @@ expressjs.com
 3. Create and run 'server.js'
 # vi server.js
 # node server.js
+
+4. Insert add json-structure and routers 'server.js'
