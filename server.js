@@ -48,6 +48,19 @@ app.post('/questions', (req, res) => {
   res.send(questions);
 })
 
+//3.4 add put route
+app.put('/question/:id', (req, res) => {
+  var question = questions.find((question) => { return question.id === Number(req.params.id) });
+  question.title = req.body.title;
+  res.sendStatus(200);
+})
+
+//3.5 add delete route
+app.delete('/question/:id', (req, res) => {
+  questions = questions.filter((question)=> { return question.id !== Number(req.params.id); })
+  res.sendStatus(200);
+})
+
 //1.4 add listen
 app.listen(3012, function() {
   console.log('API app started');
