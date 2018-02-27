@@ -39,3 +39,16 @@ expressjs.com
 4.6.1. include ObjectID after 4.1
 4.6.2. insert findOne({ _id: ObjectID(req.params.id)}
 4.7. insert updateOne()
+
+5. DB file
+5.1. Create db.js
+5.2. Add db = require('./db') as db.js
+5.3. var state in db.js
+5.4. MongoClient in db.js connect callback
+5.5. Erase 4.2 in server.js
+5.6. Modify 4.3 at server.js
+5.7. add exports.getState() at db.js
+5.8. replace db.collection in server.js to db.getState().collection
+5.9. Modify db.connect in server.js
+
+6. Models and Controllers

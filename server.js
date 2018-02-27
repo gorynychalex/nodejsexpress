@@ -10,11 +10,11 @@ var MongoClient = require('mongodb').MongoClient;
 //4.6.1 include ObjectID
 var ObjectID = require('mongodb').ObjectID;
 
+//5.2 include db.js
+var db = require('./db');
+
 //1.2 instance of express
 var app = express();
-
-//4.2 db define
-var db;
 
 //3.2 body-parser insert into app
 app.use(bodyParser.json());
@@ -43,7 +43,8 @@ app.get('/', function (req, res) {
 app.get('/questions', (req, res)=> {
   
   //4.5 insert find question
-  db.collection('questions').find().toArray((err,docs) => {
+  //5.8 add db.getState()
+  db.getState().collection('questions').find().toArray((err,docs) => {
     if(err) { console.log(err); return res.sendStatus(500); }
     res.send(docs);
   })
@@ -52,7 +53,9 @@ app.get('/questions', (req, res)=> {
 //2.3 add base route for questions
 app.get('/question/:id', (req, res) => {
   console.log(req.params);
-  db.collection('questions').findOne({ _id: ObjectID(req.params.id)}, (err,docs)=> {if(err) {throw err} res.send(docs)})
+
+  //5.8 add db.getState()
+  db.getState().collection('questions').findOne({ _id: ObjectID(req.params.id)}, (err,docs)=> {if(err) {throw err} res.send(docs)})
 })
 
 //3.3 add post route
@@ -61,7 +64,8 @@ app.post('/questions', (req, res) => {
   //var question1 = { title: req.body.title };
 
   //4.4 insert data
-  db.collection("questions").insert(req.body, (err, result) => {
+  //5.8 add db.getState()
+  db.getState().collection("questions").insert(req.body, (err, result) => {
     if(err){ console.log(err); return res.sendStatus(500); }
     res.send(req.body);
     
@@ -72,7 +76,8 @@ app.post('/questions', (req, res) => {
 app.put('/question/:id', (req, res) => {
 
   //4.7 insert update()
-  db.collection("questions").update(
+  //5.8 add db.getState()
+  db.getState().collection("questions").update(
     { _id: ObjectID(req.params.id) },
     { title: req.body.title },
     (err, result) => { if(err) throw err; res.sendStatus(200); }
@@ -82,8 +87,10 @@ app.put('/question/:id', (req, res) => {
 
 //3.5 add delete route
 app.delete('/question/:id', (req, res) => {
+
   //4.8 insert delete()
-  db.collection("questions").deleteOne(
+  //5.8 add db.getState()
+  db.getState().collection("questions").deleteOne(
     { _id: ObjectID(req.params.id) },
     (err, result) => { if(err) throw err; res.sendStatus(200);}
   )
@@ -91,11 +98,9 @@ app.delete('/question/:id', (req, res) => {
 
 
 //4.3 db initialize and include app.listen()
-MongoClient.connect('mongodb://localhost:27017/', (err, client) => {
+//5.9. Modify MongoClient.connect to db.connect
+db.connect('mongodb://localhost:27017/', (err) => {
   if(err) throw err;
-
-  //For mongodb >= 3.0.0: define db-name
-  db = client.db('myapi'); 
 
   //1.4 add listen
   app.listen(3012, function() {
