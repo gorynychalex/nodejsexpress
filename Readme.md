@@ -52,3 +52,21 @@ expressjs.com
 5.9. Modify db.connect in server.js
 
 6. Models and Controllers
+6.1. Create 'models' folder
+6.2. Create 'models/artists.js'
+6.3. include var db.js
+6.4. Add exports callback
+6.5. Create 'controllers' folder
+6.6. Create 'controllers/artists.js'
+6.7. import 'models/questions.js' to 'controllers/questions.js'
+6.8. exports all to controller.js that get models from 'models' 
+6.9. import questions controller to server.js
+6.10. remove 2.1 - Mock json structure
+6.11. modify 2.2. get all questions request
+6.12. modify 2.3. get question byId request
+6.13. exports findById from controllers
+6.14. import ObjectID to controllers
+6.15. exports findById from models
+6.16. import ObjectID
+6.17. exports create question 'models/questions.js'
+6.18. exports create question 'controllers/questions.js'

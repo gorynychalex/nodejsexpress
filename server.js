@@ -13,6 +13,9 @@ var ObjectID = require('mongodb').ObjectID;
 //5.2 include db.js
 var db = require('./db');
 
+//6.9 import questions controller
+var questionsController = require('./controllers/questions.js');
+
 //1.2 instance of express
 var app = express();
 
@@ -20,57 +23,21 @@ var app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true}));
 
-//2.2 add json-struct
-var questions = [
-  {
-    id: 1,
-    title: 'What gives Java its write once and run anywhere nature?',
-    answers: [{id: 1, title: 'The bytecode', correct: 'true'},{id: 2, title: 'virtual machine', correct: 'false'},{id: 3, title: 'Specific type of functions', correct: 'false'}]
-  },
-  {
-    id: 2,
-    name: 'What is classloader?',
-    answers: [{id: 1, title: 'is a subsystem of JVM that is used to load classes and interfaces', correct: 'true'},{id: 2, title: 'virtual machine', correct: 'false'},{id: 3, title: 'Specific type of functions', correct: 'false'}]
-  }
-];
-
 //1.3 first root route 
 app.get('/', function (req, res) {
-  res.send('Hello API');
+  res.send('Hello Questions API');
 })
 
 //2.2 add base route for questions
-app.get('/questions', (req, res)=> {
-  
-  //4.5 insert find question
-  //5.8 add db.getState()
-  db.getState().collection('questions').find().toArray((err,docs) => {
-    if(err) { console.log(err); return res.sendStatus(500); }
-    res.send(docs);
-  })
-})
+//6.11 modify
+app.get('/questions', questionsController.all);
 
 //2.3 add base route for questions
-app.get('/question/:id', (req, res) => {
-  console.log(req.params);
-
-  //5.8 add db.getState()
-  db.getState().collection('questions').findOne({ _id: ObjectID(req.params.id)}, (err,docs)=> {if(err) {throw err} res.send(docs)})
-})
+//6.12 
+app.get('/question/:id', questionsController.findById);
 
 //3.3 add post route
-app.post('/questions', (req, res) => {
-  console.log(req.body);
-  //var question1 = { title: req.body.title };
-
-  //4.4 insert data
-  //5.8 add db.getState()
-  db.getState().collection("questions").insert(req.body, (err, result) => {
-    if(err){ console.log(err); return res.sendStatus(500); }
-    res.send(req.body);
-    
-  })
-})
+app.post('/questions', questionsController.create);
 
 //3.4 add put route
 app.put('/question/:id', (req, res) => {
