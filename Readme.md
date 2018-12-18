@@ -7,11 +7,11 @@ API NodeJS
 
 Basic App: Node.js Express.js
 
-0. First of all we should 
+#0. First of all we should 
 Install node.js from nodejs.org
 https://nodejs.org/en/download/
 https://nodejs.org/en/download/package-manager/
-# node
+\# node
 
 You can try also Node Version Manager
 https://github.com/creationix/nvm
