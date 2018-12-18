@@ -32,15 +32,15 @@ expressjs.com
 3. Insert add json-structure and routers 'server.js'
 
 4. Install mongodb
-4.1. npm install
-4.2. include mongodb
-4.3. insert after 1.4 
-4.4. edit 3.3 app.post and define db.insert
-4.5. edit 2.2
-4.6. edit 2.3
-4.6.1. include ObjectID after 4.1
-4.6.2. insert findOne({ _id: ObjectID(req.params.id)}
-4.7. insert updateOne()
+-4.1. npm install
+-4.2. include mongodb
+-4.3. insert after 1.4 
+-4.4. edit 3.3 app.post and define db.insert
+-4.5. edit 2.2
+-4.6. edit 2.3
+-4.6.1. include ObjectID after 4.1
+-4.6.2. insert findOne({ _id: ObjectID(req.params.id)}
+-4.7. insert updateOne()
 
 5. DB file
 5.1. Create db.js
