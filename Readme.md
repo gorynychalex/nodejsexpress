@@ -23,11 +23,11 @@ nvm
 
 1. Install express.js
 expressjs.com
-# npm install express --save
+>\# npm install express --save
 
 2. Create and run 'server.js'
-# vi server.js
-# node server.js
+>\# vi server.js
+>\# node server.js
 
 3. Insert add json-structure and routers 'server.js'
 
